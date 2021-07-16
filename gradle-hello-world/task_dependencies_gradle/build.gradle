@@ -1,0 +1,9 @@
+// task dependencies
+
+task hello << {
+    println "Hello World"
+}
+
+task intro(dependsOn: hello) << {
+    println "Im gradle"
+}

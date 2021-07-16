@@ -1,0 +1,40 @@
+// 1. dynamic define
+4.times { counter ->
+    task "task$counter" << {
+        println "im task number $counter"
+    }
+}
+
+task0.dependsOn task2, task3
+
+// 2. 通过 API 进行任务之间的通信 - 增加任务行为
+task hello << {
+    println "Hello task"
+}
+
+hello.doFirst {
+    println 'hello first'
+}
+
+hello.doLast {
+    println 'hello last'
+}
+
+/* doFirst 和 doLast 可以进行多次调用。
+  他们分别被添加在任务的开头和结尾。
+  当任务开始执行时这些动作会按照既定顺序进行。
+  */
+
+// << 是last的简写方式
+hello << {
+    println "hello world"
+}
+
+// 3. customize attributes add in task
+task myTask {
+    ext.myProperty = "myValue"
+}
+
+task printTaskProperties << {
+    println myTask.myProperty
+}

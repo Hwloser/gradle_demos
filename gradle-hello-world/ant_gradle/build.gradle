@@ -1,0 +1,9 @@
+task loadfile << {
+    def currentDir = file('./ant_gradle').listFiles().sort()
+
+    currentDir.each { File file ->
+        if (file.isFile()) {
+            ant.load(srcFile: file, properties)
+        }
+    }
+}
